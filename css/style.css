@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#world {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  max-width: 100vh;
+  margin: 0 auto;
+  height: 100vh;
+  justify-content: center;
+}
+.block {
+  border: 1px solid black;
+}
+.sky {
+  background: #8dbfff;
+  border: 1px solid black;
+}
+.sky:hover {
+  border: 1px solid black;
+  background: #8dbf0f;
+}
+
+.tools {
+  background: #000;
+}
+.cloud {
+  background: url("../img/cloud.png") no-repeat center center/cover;
+}
+.grass {
+  background: url("../img/grass.png") no-repeat center center/cover;
+}
+.leaves {
+  background: url("../img/tree-leaves.png") no-repeat center center/cover;
+}
+.wood {
+  background: url("../img/wood.png") no-repeat center center/cover;
+}

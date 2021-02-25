@@ -1,31 +1,35 @@
+@font-face {
+  font-family: "minecraft";
+  src: url("/font/Minecraft.ttf");
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "minecraft";
 }
-#world {
-  display: grid;
-  grid-template-columns: repeat(20, 1fr);
-  grid-template-rows: repeat(20, 1fr);
-  max-width: 100vh;
-  margin: 0 auto;
-  height: 100vh;
-  justify-content: center;
+.land-el {
+  width: 60px;
+  height: 60px;
 }
-.block {
+.axe,
+.pickaxe,
+.shovel {
+  width: 60px;
+  height: 60px;
+  font-size: 12px;
+}
+.axe:active,
+.pickaxe:active,
+.shovel:active {
+  background: blue;
+}
+.main > div:hover {
   border: 1px solid black;
 }
 .sky {
   background: #8dbfff;
-  border: 1px solid black;
-}
-.sky:hover {
-  border: 1px solid black;
-  background: #8dbf0f;
-}
-
-.tools {
-  background: #000;
 }
 .cloud {
   background: url("../img/cloud.png") no-repeat center center/cover;
@@ -38,4 +42,93 @@
 }
 .wood {
   background: url("../img/wood.png") no-repeat center center/cover;
+}
+.stone {
+  background: url("../img/rock.png") no-repeat center center/cover;
+}
+.soil {
+  background: url("../img/soil.jpg") no-repeat center center/cover;
+}
+.axe,
+.pickaxe,
+.shovel {
+  border: 1px solid #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.axe > img,
+.pickaxe > img,
+.shovel > img {
+  width: 80%;
+}
+.element {
+  border: 1px solid #fff;
+  width: 50px;
+  height: 50px;
+}
+/* LAND PAGE */
+#land-page {
+  background: url("/img/minecraft-landing-page.jpg") no-repeat center / cover;
+  height: 100vh;
+  display: flex;
+  /* display should be flex */
+  align-items: flex-end;
+  justify-content: center;
+}
+.instructions {
+  background: #000;
+  width: 80%;
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  color: #fff;
+}
+.instructions .tools {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}
+#land-page button {
+  background: #6f6f6f;
+  font-size: 1rem;
+  text-align: center;
+  padding: 1rem;
+  width: 80%;
+  border: "none";
+}
+/* GAME */
+#world {
+  /* display should be none */
+  display: flex;
+  height: 100vh;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.main {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+}
+.game-elements {
+  min-width: 155px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  color: #fff;
+  background: #000;
+}
+.reset-world,
+.reset-game {
+  width: 80%;
+  padding: 10px;
+  color: #fff;
+  background: firebrick;
 }

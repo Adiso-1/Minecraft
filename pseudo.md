@@ -4,7 +4,6 @@
 
     Landing-Page.html:
         <div class='container'>
-            <img class='logo></img>
             <button class='start-btn>START</button>
         </div>
 

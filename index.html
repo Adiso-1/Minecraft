@@ -8,7 +8,79 @@
     <title>Minecraft 2D</title>
   </head>
   <body>
-    <div id="world"></div>
+    <div id="land-page">
+      <div class="instructions">
+        <h1>How To Play</h1>
+        <!-- <table>
+          <tr class="tools">
+            <th>Pick a Tool</th>
+            <td class="axe"></td>
+            <td class="pickaxe"></td>
+            <td class="shovel"></td>
+          </tr>
+          <tr class="tools">
+            <th>Collect Elements</th>
+            <td class="wood"></td>
+            <td class="stone"></td>
+            <td class="soil"></td>
+          </tr>
+        </table> -->
+        <div class="tools">
+          <div>Pick a Tool</div>
+          <div class="land-el axe">
+            <img src="./img/iron_axe.png" alt="AXE" />
+            <h6>AXE</h6>
+          </div>
+          <div class="land-el pickaxe">
+            <img src="./img/iron_pickaxe.png" alt="PICKAXE" />
+            <h6>PICKAXE</h6>
+          </div>
+          <div class="land-el shovel">
+            <img src="./img/iron_shovel.png" alt="SHOVEL" />
+            <h6>SHOVEL</h6>
+          </div>
+        </div>
+        <div class="tools">
+          <div>Collect Elements</div>
+          <div>
+            <div class="land-el wood"></div>
+            <div class="land-el leaves"></div>
+          </div>
+          <div class="land-el stone"></div>
+          <div class="land-el soil"></div>
+        </div>
+        <button class="start-btn" type="submit">START</button>
+      </div>
+    </div>
+
+    <!-- ! Game Elements -->
+    <div id="world">
+      <div class="main"></div>
+      <div class="game-elements">
+        <h1 class="inventory"></h1>
+        <h3>Inventory</h3>
+        <div class="axe">
+          <img src="./img/iron_axe.png" alt="AXE" />
+          <h4>AXE</h4>
+        </div>
+        <div class="pickaxe">
+          <img src="./img/iron_pickaxe.png" alt="PICKAXE" />
+          <h6>PICKAXE</h6>
+        </div>
+        <div class="shovel">
+          <img src="./img/iron_shovel.png" alt="SHOVEL" />
+          <h6>SHOVEL</h6>
+        </div>
+        <h3>Elements</h3>
+        <div class="element"></div>
+        <div class="element"></div>
+        <div class="element"></div>
+        <div class="element"></div>
+        <div class="element"></div>
+        <button class="reset-world" type="submit">RESET WORLD</button>
+        <button class="reset-game" type="submit">RESET GAME</button>
+      </div>
+    </div>
     <script src="./index.js"></script>
   </body>
 </html>

@@ -4,6 +4,7 @@ const world = document.querySelector('#world');
 const startBtn = document.querySelector('.start-btn');
 const resetBtn = document.querySelector(".reset-world");
 const mainGame = document.querySelector('.main');
+const elementBox = document.querySelector('.element');
 
 //! Dynamic 2D Matrix
 const matrix = [];
@@ -22,7 +23,7 @@ function matrixBuilder(rowsArg, colsArg) {
     }
   }
 }
-const arrayElement = ["sky", "cloud", "grass", "leaves", "wood", "stone","soil"];
+
 
 //! Buttons
 startBtn.addEventListener('click', () => {
@@ -64,3 +65,18 @@ function createClouds (row,untilRow,col,untilCol) {
     inject("cloud", row + i, untilRow, col - i, untilCol + i);
   }
 }
+
+//! Capture event for picking a tool
+const arrayElement = ["grass", "leaves", "wood", "stone","soil"];
+document.addEventListener("click", (e) => {
+  arrayElement.map(element => {
+    if (e.target.classList.value !== element) {
+      return null;
+    } else {
+      elementBox.classList.add(e.target.classList.value);
+      matrix[e.target.attributes.rows.textContent][
+        e.target.attributes.cols.textContent
+      ].classList.value = 'sky';
+    }
+  })
+});

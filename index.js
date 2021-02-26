@@ -1,10 +1,25 @@
+const pickedElement = {
+  grass: 0,
+  leaves: 0,
+  wood: 0,
+  stone: 0,
+  soil: 0,
+};
+
 //! Query Selectors
 const landPage = document.querySelector('#land-page');
 const world = document.querySelector('#world');
 const startBtn = document.querySelector('.start-btn');
 const resetBtn = document.querySelector(".reset-world");
 const mainGame = document.querySelector('.main');
-const elementBox = document.querySelector('.element');
+const storageStone = document.querySelector(".storage-box-stone");
+const storageLeaves = document.querySelector(".storage-box-leaves");
+const storageWood = document.querySelector(".storage-box-wood");
+const storageGrass = document.querySelector(".storage-box-grass");
+const storageSoil = document.querySelector(".storage-box-soil");
+const axe = document.querySelector(".axe");
+const pickaxe = document.querySelector(".pickaxe");
+const shovel = document.querySelector(".shovel");
 
 //! Dynamic 2D Matrix
 const matrix = [];
@@ -17,13 +32,13 @@ function matrixBuilder(rowsArg, colsArg) {
       const tile = document.createElement("div");
       tile.setAttribute("rows", rows);
       tile.setAttribute("cols", cols);
+      // tile.setAttribute("type",'tile');
       tile.classList.add("sky");
       mainGame.appendChild(tile);
       matrix[rows][cols] = tile;
     }
   }
 }
-
 
 //! Buttons
 startBtn.addEventListener('click', () => {
@@ -66,17 +81,81 @@ function createClouds (row,untilRow,col,untilCol) {
   }
 }
 
-//! Capture event for picking a tool
-const arrayElement = ["grass", "leaves", "wood", "stone","soil"];
-document.addEventListener("click", (e) => {
-  arrayElement.map(element => {
-    if (e.target.classList.value !== element) {
-      return null;
-    } else {
-      elementBox.classList.add(e.target.classList.value);
-      matrix[e.target.attributes.rows.textContent][
-        e.target.attributes.cols.textContent
-      ].classList.value = 'sky';
-    }
-  })
-});
+//! Event listener to tools clicked
+let axeClicked;
+let pickaxeClicked;
+let shovelClicked;
+axe.addEventListener('click', () => {
+  if (axeClicked) {
+    axeClicked = false;
+    axe.style.background = '#000';
+  } else {
+    axeClicked = true;
+    axe.style.background = 'blue';
+    pickaxeClicked = false;
+    pickaxe.style.background = '#000';
+    shovelClicked = false;
+    shovel.style.background = '#000';
+  }
+})
+pickaxe.addEventListener('click', () => {
+  if (pickaxeClicked) {
+    pickaxeClicked = false;
+    pickaxe.style.background = '#000';
+  } else {
+    axeClicked = false;
+    axe.style.background = '#000';
+    pickaxeClicked = true;
+    pickaxe.style.background = 'blue';
+    shovelClicked = false;
+    shovel.style.background = '#000';
+  }
+})
+
+shovel.addEventListener('click', () => {
+  if (shovelClicked) {
+    shovelClicked = false;
+    shovel.style.background = '#000';
+  } else {
+    axeClicked = false;
+    axe.style.background = '#000';
+    pickaxeClicked = false;
+    pickaxe.style.background = '#000';
+    shovelClicked = true;
+    shovel.style.background = 'blue';
+  }
+})
+
+//! Event listener to leaves & wood
+mainGame.addEventListener('click',(e) => {
+  if (e.target.className === "stone" && pickaxeClicked) {
+    e.target.className = "sky";
+    pickedElement.stone++;
+    counter = pickedElement.stone;
+    storageStone.innerHTML = counter;
+  }
+  if (e.target.className === "leaves" && axeClicked) {
+    e.target.className = "sky";
+    pickedElement.leaves++;
+    counter = pickedElement.leaves;
+    storageLeaves.innerHTML = counter;
+  }
+  if (e.target.className === "wood" && axeClicked) {
+    e.target.className = "sky";
+    pickedElement.wood++;
+    counter = pickedElement.wood;
+    storageWood.innerHTML = counter;
+  }
+  if (e.target.className === "grass" && shovelClicked) {
+    e.target.className = "sky";
+    pickedElement.grass++;
+    counter = pickedElement.grass;
+    storageGrass.innerHTML = counter;
+  }
+  if (e.target.className === "soil" && shovelClicked) {
+    e.target.className = "sky";
+    pickedElement.soil++;
+    counter = pickedElement.soil;
+    storageSoil.innerHTML = counter;
+  }
+})

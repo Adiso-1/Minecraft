@@ -10,7 +10,8 @@ const pickedElement = {
 const landPage = document.querySelector('#land-page');
 const world = document.querySelector('#world');
 const startBtn = document.querySelector('.start-btn');
-const resetBtn = document.querySelector(".reset-world");
+const resetGameBtn = document.querySelector(".reset-game");
+const resetWorldBtn = document.querySelector(".reset-world");
 const mainGame = document.querySelector('.main');
 const storageStone = document.querySelector(".storage-box-stone");
 const storageLeaves = document.querySelector(".storage-box-leaves");
@@ -61,11 +62,14 @@ startBtn.addEventListener('click', () => {
   createClouds(2, 4, 17, 19);
 })
 
-resetBtn.addEventListener('click', () => {
-  landPage.style.display = "flex";
-  world.style.display = 'none';
-  mainGame.innerHTML = '';
+resetGameBtn.addEventListener('click', () => {
+  location.reload();
 })
+// resetWorldBtn.addEventListener('click', () => {
+//   landPage.style.display = "flex";
+//   world.style.display = 'none';
+//   mainGame.innerHTML = '';
+// })
 
 //! Dynamic adding elements
 function inject(element,row,untilRow,col = 0,untilCol = matrix[0].length) {
@@ -126,7 +130,7 @@ shovel.addEventListener('click', () => {
   }
 })
 
-//! Event listener to leaves & wood
+//! Event listener to collect elements
 mainGame.addEventListener('click',(e) => {
   if (e.target.className === "stone" && pickaxeClicked) {
     e.target.className = "sky";
@@ -158,4 +162,22 @@ mainGame.addEventListener('click',(e) => {
     counter = pickedElement.soil;
     storageSoil.innerHTML = counter;
   }
+})
+//! Capture event for placing a cell in the matrix
+let stoneClicked;
+storageStone.addEventListener('click', (e) => {
+  if (storageStone.innerHTML > 0) {
+    stoneClicked = true;
+    e.target.style.border = "1px solid blue";
+  } else {
+    e.target.style.border = "1px solid red";
+  }
+  mainGame.addEventListener('click', (e) => {
+    if (stoneClicked === true) {
+      matrix[e.target.attributes.rows.value][e.target.attributes.cols.value].classList.value = 'stone';
+      pickedElement.stone--;
+      storageStone.innerHTML = pickedElement.stone;
+      stoneClicked = false;
+    }
+  })
 })

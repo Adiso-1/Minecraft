@@ -168,16 +168,19 @@ let stoneClicked;
 storageStone.addEventListener('click', (e) => {
   if (storageStone.innerHTML > 0) {
     stoneClicked = true;
-    e.target.style.border = "1px solid blue";
-  } else {
-    e.target.style.border = "1px solid red";
-  }
+  } 
   mainGame.addEventListener('click', (e) => {
     if (stoneClicked === true) {
-      matrix[e.target.attributes.rows.value][e.target.attributes.cols.value].classList.value = 'stone';
-      pickedElement.stone--;
-      storageStone.innerHTML = pickedElement.stone;
-      stoneClicked = false;
+      let matrixlocation = matrix[e.target.attributes.rows.value][e.target.attributes.cols.value].classList.value;
+      if (matrixlocation !== 'sky') {
+        return null;
+      } else {
+        matrix[e.target.attributes.rows.value][e.target.attributes.cols.value]
+          .classList.value = 'stone'
+        pickedElement.stone--;
+        storageStone.innerHTML = pickedElement.stone;
+        stoneClicked = false;
+      }
     }
   })
 })

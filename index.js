@@ -50,21 +50,20 @@ const restart = () => {
   inject("grass", 15, 16);
   inject("soil", 16, 20);
   inject("wood", 12, 15, 23, 24);
+  inject("stone", 12, 15, 11, 14);
+  inject("leaves", 13, 14, 12, 13);
 
-  //* Creating side soones with for loop
+  //* Creating side stones with for loop
   for (let i = 0; i < 4; i++) {
     inject("stone", 11 + i, 15, 0 + i, 1 + i);
   }
 
   //* Creating clouds (row,untilRow,col,untilCol)
   createClouds(3, 5, 4, 6);
-  createClouds(2, 4, 17, 19);
+  createClouds(2, 4, 17, 21);
 
   //* Creating Tree-Leaves (row,untilRow,col,untilCol)
-  createLeaves(11, 12, 20, 27);
-  createLeaves(10, 11, 21, 26);
-  createLeaves(9, 10, 22, 25);
-  createLeaves(8, 9, 23, 24);
+  createLeaves(8, 12, 23, 24);
 }
 //! Buttons
 startBtn.addEventListener('click', restart)
@@ -72,11 +71,6 @@ startBtn.addEventListener('click', restart)
 resetGameBtn.addEventListener('click', () => {
   location.reload();
 })
-// resetWorldBtn.addEventListener('click', () => {
-//   storages.forEach(e => e.innerHTML = 0)
-//   tools.forEach(e => e.style.background = '#000')
-// })
-
 //! Dynamic adding elements
 function inject(element,row,untilRow,col = 0,untilCol = matrix[0].length) {
   for (let i = row; i < untilRow; i++) {
@@ -96,6 +90,38 @@ function createLeaves (row,untilRow,col,untilCol) {
   }
 }
 
+//! Capture event for placing a cell in the matrix
+function putElement (storageElement) {
+  axeClicked = false;
+  pickaxeClicked = false;
+  shovelClicked = false;
+  axe.style.background = "#000";
+  pickaxe.style.background = "#000";
+  shovel.style.background = "#000";
+  let elementClicked;
+  if (storageElement.innerHTML > 0) {
+    elementClicked = true;
+  }
+  mainGame.addEventListener('click', (e) => {
+    if (elementClicked === true) {
+      let matrixlocation = matrix[e.target.attributes.rows.value][e.target.attributes.cols.value].classList.value;
+      if (matrixlocation !== 'sky') {
+        return null;
+      } else {
+        matrix[e.target.attributes.rows.value][
+          e.target.attributes.cols.value
+        ].classList.value = storageElement.classList[1]; 
+        pickedElement[storageElement.classList[1]]--;
+        storageElement.innerHTML = pickedElement[storageElement.classList[1]];
+        elementClicked = false;
+        return;
+      }
+    }
+  })
+}
+storages.forEach(el => {
+  el.addEventListener("click", () => putElement(el));
+})
 //! Event listener to tools clicked
 let axeClicked;
 let pickaxeClicked;
@@ -104,6 +130,7 @@ axe.addEventListener('click', () => {
   if (axeClicked) {
     axeClicked = false;
     axe.style.background = '#000';
+    mainGame.style.cursor = `url("../img/iron_axe.png"), auto`;
   } else {
     axeClicked = true;
     pickaxeClicked = false;
@@ -172,30 +199,4 @@ mainGame.addEventListener('click',(e) => {
     counter = pickedElement.soil;
     storageSoil.innerHTML = counter;
   }
-})
-//! Capture event for placing a cell in the matrix
-function putElement (storageElement) {
-  let elementClicked;
-  if (storageElement.innerHTML > 0) {
-    elementClicked = true;
-  }
-  mainGame.addEventListener('click', (e) => {
-    if (elementClicked === true) {
-      let matrixlocation = matrix[e.target.attributes.rows.value][e.target.attributes.cols.value].classList.value;
-      if (matrixlocation !== 'sky') {
-        return null;
-      } else {
-        matrix[e.target.attributes.rows.value][
-          e.target.attributes.cols.value
-        ].classList.value = storageElement.classList[1]; // Check for adding name atribute
-        pickedElement[storageElement.classList[1]]--;
-        storageElement.innerHTML = pickedElement[storageElement.classList[1]];
-        elementClicked = false;
-        return;
-      }
-    }
-  })
-}
-storages.forEach(el => {
-  el.addEventListener("click", () => putElement(el));
 })

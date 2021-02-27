@@ -2,14 +2,19 @@
   font-family: "minecraft";
   src: url("/font/Minecraft.ttf");
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "minecraft";
 }
-
+#adi {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  color: #fff;
+  font-size: 20px;
+}
 .axe,
 .pickaxe,
 .shovel {
@@ -138,6 +143,12 @@
   color: #fff;
   background: firebrick;
 }
+.storage {
+  text-align: center;
+}
+.two-boxes {
+  margin-left: -40px;
+}
 @media only screen and (max-width: 650px) {
   #land-page {
     background: url("/img/turn-to-landscape.gif") no-repeat center center;
@@ -147,6 +158,9 @@
   }
 }
 @media only screen and (min-width: 650px) and (max-width: 850px) {
+  #adi {
+    font-size: 16px;
+  }
   .instructions > h1 {
     font-size: 20px;
   }
@@ -158,11 +172,17 @@
     width: 50px;
     width: 50px;
   }
+  .land-el.stone {
+    margin-right: 20px;
+  }
+  .land-el.grass {
+    margin-right: 12px;
+  }
   .two-boxes {
     display: flex;
   }
   .tool {
-    width: 50px;
+    width: 55px;
     height: 50px;
   }
   .tools {

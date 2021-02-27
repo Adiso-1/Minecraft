@@ -18,6 +18,7 @@ const storageLeaves = document.querySelector(".storage-box-leaves");
 const storageWood = document.querySelector(".storage-box-wood");
 const storageGrass = document.querySelector(".storage-box-grass");
 const storageSoil = document.querySelector(".storage-box-soil");
+const storages = document.querySelectorAll(".storage-box");
 const axe = document.querySelector(".axe");
 const pickaxe = document.querySelector(".pickaxe");
 const shovel = document.querySelector(".shovel");
@@ -50,7 +51,6 @@ startBtn.addEventListener('click', () => {
   inject("grass", 15, 16);
   inject("soil", 16, 20);
   inject("wood", 12, 15, 23, 24);
-  inject("leaves", 9, 12, 21, 26);
   
   //* Creating side soones with for loop
   for (let i = 0; i < 4; i++) {
@@ -60,6 +60,12 @@ startBtn.addEventListener('click', () => {
   //* Creating clouds (row,untilRow,col,untilCol)
   createClouds(3, 5, 4, 6);
   createClouds(2, 4, 17, 19);
+
+  //* Creating Tree-Leaves (row,untilRow,col,untilCol)
+  createLeaves(11, 12, 20, 27);
+  createLeaves(10, 11, 21, 26);
+  createLeaves(9, 10, 22, 25);
+  createLeaves(8, 9, 23, 24);
 })
 
 resetGameBtn.addEventListener('click', () => {
@@ -82,6 +88,11 @@ function inject(element,row,untilRow,col = 0,untilCol = matrix[0].length) {
 function createClouds (row,untilRow,col,untilCol) {
   for (let i = 0; i < untilRow - row ; i++) {
     inject("cloud", row + i, untilRow, col - i, untilCol + i);
+  }
+}
+function createLeaves (row,untilRow,col,untilCol) {
+  for (let i = 0; i < untilRow - row ; i++) {
+    inject("leaves", row + i, untilRow, col - i, untilCol + i);
   }
 }
 
@@ -164,23 +175,28 @@ mainGame.addEventListener('click',(e) => {
   }
 })
 //! Capture event for placing a cell in the matrix
-let stoneClicked;
-storageStone.addEventListener('click', (e) => {
-  if (storageStone.innerHTML > 0) {
-    stoneClicked = true;
-  } 
+function putElement (storageElement) {
+  let elementClicked;
+  if (storageElement.innerHTML > 0) {
+    elementClicked = true;
+  }
   mainGame.addEventListener('click', (e) => {
-    if (stoneClicked === true) {
+    if (elementClicked === true) {
       let matrixlocation = matrix[e.target.attributes.rows.value][e.target.attributes.cols.value].classList.value;
       if (matrixlocation !== 'sky') {
         return null;
       } else {
-        matrix[e.target.attributes.rows.value][e.target.attributes.cols.value]
-          .classList.value = 'stone'
-        pickedElement.stone--;
-        storageStone.innerHTML = pickedElement.stone;
-        stoneClicked = false;
+        matrix[e.target.attributes.rows.value][
+          e.target.attributes.cols.value
+        ].classList.value = storageElement.classList[1]; // Check for adding name atribute
+        pickedElement[storageElement.classList[1]]--;
+        storageElement.innerHTML = pickedElement[storageElement.classList[1]];
+        elementClicked = false;
+        return;
       }
     }
   })
+}
+storages.forEach(el => {
+  el.addEventListener("click", () => putElement(el));
 })

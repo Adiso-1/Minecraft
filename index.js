@@ -19,6 +19,7 @@ const storageWood = document.querySelector(".storage-box-wood");
 const storageGrass = document.querySelector(".storage-box-grass");
 const storageSoil = document.querySelector(".storage-box-soil");
 const storages = document.querySelectorAll(".storage-box");
+const tools = document.querySelectorAll(".tool");
 const axe = document.querySelector(".axe");
 const pickaxe = document.querySelector(".pickaxe");
 const shovel = document.querySelector(".shovel");
@@ -41,9 +42,7 @@ function matrixBuilder(rowsArg, colsArg) {
     }
   }
 }
-
-//! Buttons
-startBtn.addEventListener('click', () => {
+const restart = () => {
   landPage.style.display = "none";
   world.style.display = "flex";
   matrixBuilder(20, 30);
@@ -51,12 +50,12 @@ startBtn.addEventListener('click', () => {
   inject("grass", 15, 16);
   inject("soil", 16, 20);
   inject("wood", 12, 15, 23, 24);
-  
+
   //* Creating side soones with for loop
   for (let i = 0; i < 4; i++) {
     inject("stone", 11 + i, 15, 0 + i, 1 + i);
   }
-  
+
   //* Creating clouds (row,untilRow,col,untilCol)
   createClouds(3, 5, 4, 6);
   createClouds(2, 4, 17, 19);
@@ -66,15 +65,16 @@ startBtn.addEventListener('click', () => {
   createLeaves(10, 11, 21, 26);
   createLeaves(9, 10, 22, 25);
   createLeaves(8, 9, 23, 24);
-})
+}
+//! Buttons
+startBtn.addEventListener('click', restart)
 
 resetGameBtn.addEventListener('click', () => {
   location.reload();
 })
 // resetWorldBtn.addEventListener('click', () => {
-//   landPage.style.display = "flex";
-//   world.style.display = 'none';
-//   mainGame.innerHTML = '';
+//   storages.forEach(e => e.innerHTML = 0)
+//   tools.forEach(e => e.style.background = '#000')
 // })
 
 //! Dynamic adding elements
@@ -106,10 +106,10 @@ axe.addEventListener('click', () => {
     axe.style.background = '#000';
   } else {
     axeClicked = true;
-    axe.style.background = 'blue';
     pickaxeClicked = false;
-    pickaxe.style.background = '#000';
     shovelClicked = false;
+    axe.style.background = 'blue';
+    pickaxe.style.background = '#000';
     shovel.style.background = '#000';
   }
 })
@@ -119,24 +119,23 @@ pickaxe.addEventListener('click', () => {
     pickaxe.style.background = '#000';
   } else {
     axeClicked = false;
-    axe.style.background = '#000';
     pickaxeClicked = true;
-    pickaxe.style.background = 'blue';
     shovelClicked = false;
+    axe.style.background = '#000';
+    pickaxe.style.background = 'blue';
     shovel.style.background = '#000';
   }
 })
-
 shovel.addEventListener('click', () => {
   if (shovelClicked) {
     shovelClicked = false;
     shovel.style.background = '#000';
   } else {
     axeClicked = false;
-    axe.style.background = '#000';
     pickaxeClicked = false;
-    pickaxe.style.background = '#000';
     shovelClicked = true;
+    axe.style.background = '#000';
+    pickaxe.style.background = '#000';
     shovel.style.background = 'blue';
   }
 })

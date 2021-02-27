@@ -11,20 +11,6 @@
     <div id="land-page">
       <div class="instructions">
         <h1>How To Play</h1>
-        <!-- <table>
-          <tr class="tools">
-            <th>Pick a Tool</th>
-            <td class="axe"></td>
-            <td class="pickaxe"></td>
-            <td class="shovel"></td>
-          </tr>
-          <tr class="tools">
-            <th>Collect Elements</th>
-            <td class="wood"></td>
-            <td class="stone"></td>
-            <td class="soil"></td>
-          </tr>
-        </table> -->
         <div class="tools">
           <div>Pick a Tool</div>
           <div class="land-el land-el-axe">
@@ -42,7 +28,7 @@
         </div>
         <div class="tools">
           <div>Collect Elements</div>
-          <div>
+          <div class="two-boxes">
             <div class="land-el wood"></div>
             <div class="land-el leaves"></div>
           </div>
@@ -59,33 +45,46 @@
     <div id="world">
       <div class="main"></div>
       <div class="game-elements">
-        <h1 class="inventory"></h1>
         <h3>Inventory</h3>
-        <div class="axe">
-          <img src="./img/iron_axe.png" alt="AXE" />
-          <h4>AXE</h4>
-        </div>
-        <div class="pickaxe">
-          <img src="./img/iron_pickaxe.png" alt="PICKAXE" />
-          <h6>PICKAXE</h6>
-        </div>
-        <div class="shovel">
-          <img src="./img/iron_shovel.png" alt="SHOVEL" />
-          <h6>SHOVEL</h6>
+        <div class="tools">
+          <div class="tool axe">
+            <img src="./img/iron_axe.png" alt="AXE" />
+            <h4>AXE</h4>
+          </div>
+          <div class="tool pickaxe">
+            <img src="./img/iron_pickaxe.png" alt="PICKAXE" />
+            <h6>PICKAXE</h6>
+          </div>
+          <div class="tool shovel">
+            <img src="./img/iron_shovel.png" alt="SHOVEL" />
+            <h6>SHOVEL</h6>
+          </div>
         </div>
         <h3>Elements</h3>
-        <h5>Grass</h5>
-        <div class="storage-box grass storage-box-grass">0</div>
-        <h5>Leaves</h5>
-        <div class="storage-box leaves storage-box-leaves">0</div>
-        <h5>Wood</h5>
-        <div class="storage-box wood storage-box-wood">0</div>
-        <h5>Stone</h5>
-        <div class="storage-box stone storage-box-stone">0</div>
-        <h5>Soil</h5>
-        <div class="storage-box soil storage-box-soil">0</div>
+        <div class="storage">
+          <div>
+            <h5>Grass</h5>
+            <div class="storage-box grass storage-box-grass">0</div>
+          </div>
+          <div>
+            <h5>Leaves</h5>
+            <div class="storage-box leaves storage-box-leaves">0</div>
+          </div>
+          <div>
+            <h5>Wood</h5>
+            <div class="storage-box wood storage-box-wood">0</div>
+          </div>
+          <div>
+            <h5>Stone</h5>
+            <div class="storage-box stone storage-box-stone">0</div>
+          </div>
+          <div>
+            <h5>Soil</h5>
+            <div class="storage-box soil storage-box-soil">0</div>
+          </div>
+        </div>
         <button class="reset-game" type="submit">RESET GAME</button>
-        <button class="reset-world" type="submit">RESET WORLD</button>
+        <!-- <button class="reset-world" type="submit">RESET WORLD</button> -->
       </div>
     </div>
     <script src="./index.js"></script>
